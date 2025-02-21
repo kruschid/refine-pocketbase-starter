@@ -1,0 +1,22 @@
+name: refine-pocketbase-starter
+
+services:
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:0.25.7
+    container_name: pocketbase
+    restart: unless-stopped
+    ports:
+      - 8090:8090
+    volumes:
+      - ./pb_migrations:/pb_migrations
+      - ./pb_hooks:/pb_hooks
+      - ./pb_data:/pb_data
+    command: ["--dev"]
+  
+  inbucket:
+    image: inbucket/inbucket:3.0.4
+    container_name: inbucket
+    ports:
+      - 9000:9000
+      - 2500:2500
+      - 1100:1100
