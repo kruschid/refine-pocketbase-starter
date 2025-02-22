@@ -61,7 +61,7 @@ jobs:
       with:
         registry: ghcr.io # remove this line to use dockerhub instead
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
     - 
       name: Get Image Tag
       id: get_tag
