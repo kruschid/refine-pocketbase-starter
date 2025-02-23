@@ -10,6 +10,8 @@ jobs:
   build_and_maybe_publish:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
     -
       name: Cache Docker layers
