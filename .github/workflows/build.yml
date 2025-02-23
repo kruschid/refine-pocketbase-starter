@@ -2,10 +2,10 @@ name: Test & Build & Publish
 on:
   push:
     branches: [ main ]
+    tags: ['[0-9]+.[0-9]+.[0-9]+']
   pull_request:
     branches: [ main ]
-  release:
-    types: [ published ]
+
 jobs:
   build_and_maybe_publish:
     timeout-minutes: 60
@@ -39,7 +39,7 @@ jobs:
       run: |
         docker compose up -d
     - 
-      name: Test App
+      name: Test
       working-directory: app
       run: | 
         npm ci
@@ -66,19 +66,20 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - 
-      name: Get Image Tag
-      id: get_tag
-      run: echo "TAG=$(git describe --tags --always)" >> $GITHUB_ENV
-    -
       # https://github.com/docker/build-push-action
       name: Build & Push
-      if: github.event_name == 'release' && !github.event.release.prerelease
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
       uses: docker/build-push-action@v6
       with:
         context: .
         push: true
+        # uncomment for multi platform builds:
+        # platforms: linux/amd64,linux/arm64,linux/arm/v7
         tags: |
           ghcr.io/${{ github.repository }}:latest
-          ghcr.io/${{ github.repository }}:${{ env.TAG }}
-        platforms: linux/amd64 # ,linux/arm64,linux/arm/v7
+          ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+    -
+      name: Release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
     
