@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const baseURL = "http://localhost:5173";
+const baseURL = "http://localhost:8080";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
