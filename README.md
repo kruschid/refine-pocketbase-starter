@@ -1,50 +1,88 @@
-# React + TypeScript + Vite
+# Refine PocketBase Starter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Your full stack SaaS/Tool/App/Product in one single Docker image.
 
-Currently, two official plugins are available:
+## Why Refine PocketBase Starter
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- frontend
+  - vite, typescript, eslint
+  - Refine (React meta-framework for CRUD-heavy web applications)
+  - headless, use any UI-Framework you like
+  - real-time updates enabled
+  - typescript types generation from database schema
+  - typesafe routes
+  - e2e tests with playwright
+- backend
+  - pocketbase Open Source backend
+  - sqlite database and crud api
+  - admin dashboard
+  - authentication supports passwords, otp, and oauth providers
+  - authorization with custom roles and rules
+  - file storage
+- deployment
+  - preconfigured github actions pipeline (build, test, container registry push)
+  - frontend & backend in one single docker image
+  - stores docker images in github container registry by default
+  - easy self-hosting on VPS (hetzner, linode, fly.io, etc..) or using your own hardware (i.e. Raspberry Pi)
+  - ready for cloud deployment via Goole [Cloud Run](https://cloud.google.com/run?hl=en)
 
-- Configure the top-level `parserOptions` property like this:
+## Development
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+cd pocketbase
+docker compose up
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Admin Dashboard
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Url: http://localhost:8090/\_
+User: admin@pocketbase.local
+Password: 1234567890
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Inbucket
+
+Url: http://localhost:9000
+
+### Frontend
+
+```sh
+cd app
+npm run dev
 ```
+
+Url: http://localhost:8080
+
+### Database Migrations
+
+- Migration are generated automatically whener the db schema is modified using pocketbase dashboard.
+- However, creating migrations manually is possibl as well
+- Migrations are part of the deployment and thus must be added to your git commits to be included in the final docker image.
+
+## Deployment
+
+Currently two options were tested and don't require any additional configuration: Self-hosting and Google Cloud Run.
+
+### Self-hosting
+
+For self-hosting you can build and push a docker image to github packages by creating a tag following semver-like syntax:
+
+```sh
+git tag 1.0.0
+git push --tags
+```
+
+Only tags that have a `[0-9]+.[0-9]+.[0-9]+` format are suported by default. You can modify the format by editing `.github/workflows/build.yml`
+
+- Pushing a new tag will trigger a docker build. The default architecture is `linux/amd64`.
+- Please modify `.github/workflows/build.yml` if you want to self-host the docker image on your Raspberry Pi or deploy to a Server with ARM archtecture.
+- Building multiple architectures (i.e. `linux/amd64,linux/arm64,linux/arm/v7`) at once is possible as well.
+
+### Cloud Run
+
+https://github.com/GoogleCloudPlatform/cloud-run-button
+
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
