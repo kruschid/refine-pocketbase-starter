@@ -4,8 +4,8 @@ Packages your full-stack tool/app/product in a single Docker image (`~33 MB`) an
 
 ## Why Choose the Refine PocketBase Starter
 
-- **Refine** provides business logic for your UI elements, supporting CRUD functions, security, state management, and live updates.
-- **PocketBase** is a powerful combination of a database, real-time API, authentication with a dynamic authorization system, file storage, backup management, and an admin dashboard with robust user management.
+- [**Refine**](https://refine.dev/) provides business logic for your UI elements, supporting CRUD functions, security, state management, and live updates.
+- [**PocketBase**](https://pocketbase.io/) is a powerful combination of a database, real-time API, authentication with a dynamic authorization system, file storage, backup management, and an admin dashboard with robust user management.
 - This template combines these two open-source tools, saving you days of setting up dependencies, build scripts, pipelines, and deployment, allowing you to start shipping features right away.
 
 ## Features
@@ -17,7 +17,7 @@ Packages your full-stack tool/app/product in a single Docker image (`~33 MB`) an
   - Real-time updates enabled
   - E2E tests with Playwright
   - Typesafe routes
-  - TypeScript type generation from database schema
+  - Pre-configured TypeScript type generation from database schema with [pocketbase-typegen](https://github.com/patmood/pocketbase-typegen)
   - Vite, TypeScript, ESLint
 
 - **Backend**
@@ -25,9 +25,10 @@ Packages your full-stack tool/app/product in a single Docker image (`~33 MB`) an
   - PocketBase open-source backend
   - SQLite database and CRUD API
   - Admin dashboard
-  - Authentication supports passwords, OTP, and OAuth providers
+  - Authentication supports passwords, OTP, OAuth2, MFA, and users impersonation
   - Authorization with custom roles and rules
-  - File storage
+  - File storage (local file system or S3 storage)
+  - [Custom routes, middlewares and event hooks with JavaScript](https://pocketbase.io/docs/js-overview/)
 
 - **Deployment**
   - Preconfigured GitHub Actions pipeline (build, test, container registry push)
