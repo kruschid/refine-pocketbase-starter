@@ -2,11 +2,11 @@
 
 Packages your full-stack tool/app/product in a single Docker image (`~33 MB`) and stores it in a centralized location, making it easily accessible for deployment across different environments.
 
-## Why Choose the Refine PocketBase Starter
+## Why
 
 - [**Refine**](https://refine.dev/) provides business logic for your UI elements, supporting CRUD functions, security, state management, and live updates.
 - [**PocketBase**](https://pocketbase.io/) is a powerful combination of a database, real-time API, authentication with a dynamic authorization system, file storage, backup management, and an admin dashboard with robust user management.
-- This template combines these two open-source tools, saving you days of setting up dependencies, build scripts, pipelines, and deployment, allowing you to start shipping features right away.
+- This template combines these two open-source tools, saving you days of setting up dependencies, build-scripts, pipelines, and deployment, allowing you to start shipping features right away.
 
 ## Features
 
