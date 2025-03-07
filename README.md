@@ -1,36 +1,39 @@
+[![Discord](https://img.shields.io/badge/Chat%20on-Discord-%235865f2)](https://discord.gg/BCGmvSSJBk)
+
 # Refine PocketBase Starter
 
-Packages your full-stack tool/app/product in a single Docker image (`~33 MB`) and stores it in a centralized location, making it easily accessible for deployment across different environments.
+Packages your full-stack tool/app/product in a single Docker image (`~33 MB`) and stores it in a centralized location (GitHub Container Registry by default), making it easily accessible for distribution across different environments.
 
 ## Why
 
 - [**Refine**](https://refine.dev/) provides business logic for your UI elements, supporting CRUD functions, security, state management, and live updates.
 - [**PocketBase**](https://pocketbase.io/) is a powerful combination of a database, real-time API, authentication with a dynamic authorization system, file storage, backup management, and an admin dashboard with robust user management.
-- This template combines these two open-source tools, saving you days of setting up dependencies, build-scripts, pipelines, and deployment, allowing you to start shipping features right away.
+- This template combines these two open-source tools, saving you days of setting up dependencies, build-scripts, pipelines, and distribution, allowing you to start shipping features right away.
 
 ## Features
 
 - **Frontend**
 
   - Refine (React meta-framework for CRUD-heavy web applications)
+  - Refine providers for PocketBase using the [refine-pocketbase](https://github.com/kruschid/refine-pocketbase) library and [PocketBase JS SDK](https://github.com/pocketbase/js-sdk)
   - Headless, use any UI framework you like
   - Real-time updates enabled
-  - E2E tests with Playwright
-  - Typesafe routes
-  - Pre-configured TypeScript type generation from database schema with [pocketbase-typegen](https://github.com/patmood/pocketbase-typegen)
+  - E2E tests with Playwright (optional)
+  - Typesafe routes using the [typesafe-routes](https://github.com/kruschid/typesafe-routes) library (optional)
+  - Pre-configured TypeScript type generation from database schema with [pocketbase-typegen](https://github.com/patmood/pocketbase-typegen) (optional)
   - Vite, TypeScript, ESLint
 
-- **Backend**
+- **Backend (Pocketbase)**
 
-  - PocketBase open-source backend
   - SQLite database and CRUD API
   - Admin dashboard
-  - Authentication supports passwords, OTP, OAuth2, MFA, and users impersonation
+  - Authentication with passwords, OTP, OAuth2, MFA, and users impersonation
   - Authorization with custom roles and rules
   - File storage (local file system or S3 storage)
+  - Pre-configured email testing with [Inbucket webmail server](https://github.com/inbucket/inbucket)
   - [Custom routes, middlewares and event hooks with JavaScript](https://pocketbase.io/docs/js-overview/)
 
-- **Deployment**
+- **Distribution**
   - Preconfigured GitHub Actions pipeline (build, test, container registry push)
   - Frontend & backend in a single Docker image
   - Stores Docker images in GitHub Container Registry by default
@@ -82,7 +85,7 @@ npm run dev # starts dev server on port 8080
 
 This will launch the application, making it accessible in your browser at the specified URL. Ensure that all necessary dependencies are installed before running the development server.
 
-Now you are all set up to add more frontend dependencies and start turning your app ideas into code. If you're interested in learning how to deploy your application and make your features available to users, continue reading the deployment section.
+Now you are all set up to add more frontend dependencies and start turning your app ideas into code. If you're interested in learning how to deploy your application and make your features available to users, continue reading the distribution section.
 
 ```sh
 cd app
@@ -92,14 +95,14 @@ npx playwright test --ui  # runs playwright tests with gui
 
 ## Database Migrations
 
-Database migrations are a way to manage versions of your database schema. They allow you to update your database schema in production while preserving existing data. Migrations are generated automatically whenever the database schema is modified using the PocketBase dashboard. However, you also have the option to create migrations manually. Since migrations are part of the deployment process, they must be included in your git commits to ensure they are part of the final Docker image.
+Database migrations are a way to manage versions of your database schema. They allow you to update your database schema in production while preserving existing data. Migrations are generated automatically whenever the database schema is modified using the PocketBase dashboard. However, you also have the option to create migrations manually. Since migrations are part of the distribution process, they must be included in your git commits to ensure they are part of the final Docker image.
 
 > [!TIP]
 > Remember to regularly commit and test migration changes to prevent issues during deployment.
 
-## Deployment
+## Distribution
 
-The default deployment method is via GitHub Container Registry. Other container registries (Dockerhub, gcr.io, etc.) can also be used, but they require minor adjustments to the GitHub Action workflow file.
+The default distribution method is via GitHub Container Registry. Other container registries (Dockerhub, gcr.io, etc.) can also be used, but they require minor adjustments to the GitHub Action workflow file.
 
 A GitHub workflow will build a single Docker image that can be deployed with a single command (`docker compose up -d`) on your server or using tools like Portainer and Docker, etc.
 
@@ -108,7 +111,7 @@ A GitHub workflow will build a single Docker image that can be deployed with a s
 >
 > You can find [deployment instructions for Google Cloud Run here](https://github.com/rodydavis/pocketbase-cloudrun), and here is the corresponding [discussion thread](https://github.com/pocketbase/pocketbase/discussions/5054).
 
-This approach allows for flexible deployment options depending on your infrastructure preferences and requirements.
+This approach allows for flexible distribution options depending on your infrastructure preferences and requirements.
 
 ### Publishing
 
@@ -132,7 +135,7 @@ Pushing a new tag will trigger a workflow that builds a Docker image, which is t
 
 The default architecture is `linux/amd64`. Modify the `.github/workflows/build.yml` file if you want to self-host the Docker image on a Raspberry Pi or deploy to a server with an ARM architecture.
 
-Building multiple architectures (e.g., `linux/amd64,linux/arm64,linux/arm/v7`) simultaneously is also possible. Considerations for architecture and infrastructure are important for ensuring compatibility with your deployment environment.
+Building multiple architectures (e.g., `linux/amd64,linux/arm64,linux/arm/v7`) simultaneously is also possible. Considerations for architecture and infrastructure are important for ensuring compatibility with your environment.
 
 For deploying PocketBase on a Synology NAS, refer to this guide: [How to Install PocketBase on Your Synology NAS](https://rumjahn.com/how-to-install-pocketbase-on-your-synology-nas-step-by-step-guide/).
 
