@@ -2,7 +2,7 @@ name: refine-pocketbase-starter
 
 services:
   pocketbase:
-    image: ghcr.io/muchobien/pocketbase:0.25.7
+    image: ghcr.io/muchobien/pocketbase:0.28
     container_name: pocketbase
     restart: unless-stopped
     ports:
