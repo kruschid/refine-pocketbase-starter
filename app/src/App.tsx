@@ -1,15 +1,13 @@
 import { Authenticated, AuthPage, ErrorComponent, Refine, ResourceProps } from "@refinedev/core";
 import { HeadlessCreateInferencer, HeadlessEditInferencer, HeadlessListInferencer, HeadlessShowInferencer } from "@refinedev/inferencer/headless";
 import routerBindings, { NavigateToResource } from "@refinedev/react-router";
-import PocketBase from "pocketbase";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { AuthOptions, authProvider, dataProvider, liveProvider } from "refine-pocketbase";
 import { renderPath, template } from "typesafe-routes";
 import { CustomPage } from "./pages/custom/CustomPage";
 import { Collections } from "./pocketbase.generated";
 import { r } from "./routes";
-
-const pb = new PocketBase(import.meta.env.DEV ? "http://127.0.0.1:8090" : undefined);
+import { pb } from "./utils/pocketbase";
 
 const authOptions: AuthOptions = {
   registerRedirectTo: renderPath(r.login, {}),
