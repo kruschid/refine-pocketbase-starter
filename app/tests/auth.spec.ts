@@ -1,5 +1,5 @@
+import { randomUUID } from "node:crypto";
 import { test } from "@playwright/test";
-import { randomUUID } from "crypto";
 
 const INBUCKET_URL = "http://127.0.0.1:9000";
 
@@ -50,7 +50,7 @@ test.describe("auth provider", () => {
       .get(`${INBUCKET_URL}/api/v1/mailbox/${mailbox}`)
       .then((res) => res.json())
       .then(([{ id }]) =>
-        request.get(`${INBUCKET_URL}/api/v1/mailbox/${mailbox}/${id}`)
+        request.get(`${INBUCKET_URL}/api/v1/mailbox/${mailbox}/${id}`),
       )
       .then((res) => res.json())
       .then(
@@ -59,7 +59,7 @@ test.describe("auth provider", () => {
             .match(/\[Reset password\]\((.+)\)/)
             .slice(-1)[0] // extract link
             .split("/")
-            .slice(-1) // extract token
+            .slice(-1), // extract token
       );
 
     // update password

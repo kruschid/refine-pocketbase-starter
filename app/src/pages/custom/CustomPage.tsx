@@ -1,14 +1,13 @@
-import { useApiUrl, useCustom } from '@refinedev/core';
-import type React from 'react';
+import { useApiUrl, useCustom } from "@refinedev/core";
+import type React from "react";
 
 export const CustomPage: React.FC = () => {
   const apiUrl = useApiUrl();
 
   const { query } = useCustom({
     url: `${apiUrl}/api/custom`,
-    method: 'get',
+    method: "get",
   });
-
 
   if (query.isPending) return <div>Loading...</div>;
   if (query.error) return <div>Error: {query.error.message}</div>;
