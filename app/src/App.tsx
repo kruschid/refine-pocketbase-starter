@@ -1,8 +1,8 @@
-import { Authenticated, AuthPage, ErrorComponent, Refine, ResourceProps } from "@refinedev/core";
+import { Authenticated, AuthPage, ErrorComponent, Refine, type ResourceProps } from "@refinedev/core";
 import { HeadlessCreateInferencer, HeadlessEditInferencer, HeadlessListInferencer, HeadlessShowInferencer } from "@refinedev/inferencer/headless";
 import routerBindings, { NavigateToResource } from "@refinedev/react-router";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import { AuthOptions, authProvider, dataProvider, liveProvider } from "refine-pocketbase";
+import { type AuthOptions, authProvider, dataProvider, liveProvider } from "refine-pocketbase";
 import { renderPath, template } from "typesafe-routes";
 import { CustomPage } from "./pages/custom/CustomPage";
 import { Collections } from "./pocketbase.generated";
@@ -42,7 +42,6 @@ export const App = () =>
         liveMode: "auto",
         syncWithLocation: true,
         warnWhenUnsavedChanges: true,
-        useNewQueryKeys: true,
       }}
     >
       <Routes>

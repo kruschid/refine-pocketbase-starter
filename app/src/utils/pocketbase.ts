@@ -1,5 +1,5 @@
 import PocketBase from "pocketbase";
-import { TypedPocketBase } from "../pocketbase.generated";
+import type { TypedPocketBase } from "../pocketbase.generated";
 
 export const pb = new PocketBase(
   import.meta.env.DEV
