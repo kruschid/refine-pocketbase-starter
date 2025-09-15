@@ -12,15 +12,13 @@
   },
   "dependencies": {
     "@refinedev/core": "^5.0.1",
-    "@refinedev/inferencer": "^6.0.1",
     "@refinedev/react-router": "^2.0.0",
     "@refinedev/react-table": "^6.0.0",
     "pocketbase": "^0.26.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.2.0",
-    "refine-pocketbase": "^0.4.2",
-    "typesafe-routes": "^12.3.0"
+    "refine-pocketbase": "^0.4.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
