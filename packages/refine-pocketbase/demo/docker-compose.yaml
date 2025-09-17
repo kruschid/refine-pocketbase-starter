@@ -1,0 +1,21 @@
+name: refine-pocketbase-demo
+
+services:
+  pocketbase:
+    container_name: refine-pocketbase-demo-pocketbase
+    image: ghcr.io/muchobien/pocketbase:0.30
+    ports:
+      - 8090:8090
+    volumes:
+      - ./pocketbase/pb_migrations:/pb_migrations
+      - ./pocketbase/pb_hooks:/pb_hooks
+      # - ./pocketbase/pb_data:/pb_data
+    command: ["--dev"]
+  
+  inbucket:
+    container_name: refine-pocketbase-demo-inbucket
+    image: inbucket/inbucket:3.1.0
+    ports:
+      - 9000:9000
+      - 2500:2500
+      - 1100:1100

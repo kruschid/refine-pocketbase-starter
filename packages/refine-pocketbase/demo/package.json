@@ -1,0 +1,55 @@
+{
+  "name": "demo",
+  "version": "0.0.0",
+  "repository": "https://github.com/kruschid/refine-pocketbase.git",
+  "author": "Denis Kruschinski <4989565+kruschid@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@refinedev/core": "^5.0.1",
+    "@refinedev/inferencer": "^6.0.1",
+    "@refinedev/react-hook-form": "^5.0.0",
+    "@refinedev/react-router": "^2.0.0",
+    "@refinedev/react-table": "^6.0.0",
+    "pocketbase": "^0.26.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-live": "^4.1.8",
+    "react-router": "^7.9.1",
+    "react-router-dom": "^7.9.1",
+    "refine-pocketbase": "file:../lib",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@refinedev/cli": "^2.16.48",
+    "@types/node": "^24.5.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.6"
+  },
+  "scripts": {
+    "dev": "refine dev --host 0.0.0.0",
+    "build": "tsc && refine build",
+    "preview": "refine start",
+    "refine": "refine"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "refine": {
+    "projectId": "K2WTtI-rl83Fw-Fn1FJF"
+  }
+}
