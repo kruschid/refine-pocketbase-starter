@@ -1,3 +1,4 @@
+import { get, has, set } from "@/utils/paths";
 import type { UseFormInput } from "@mantine/form";
 import {
   type UseFormReturnType as UseMantineFormReturnType,
@@ -14,7 +15,6 @@ import {
   useTranslate,
   useWarnAboutChange,
 } from "@refinedev/core";
-import { get, has, set } from "lodash";
 import type React from "react";
 import { useEffect } from "react";
 
@@ -202,11 +202,11 @@ export const useForm = <
       const data = query?.data?.data ?? {};
 
       Object.keys(registeredFields).forEach((key) => {
-        const hasValue = has(data, key); // lodash.has
-        const dataValue = get(data, key); // lodash.get
+        const hasValue = has(data, key);
+        const dataValue = get(data, key);
 
         if (hasValue) {
-          set(fields, key, dataValue); // lodash.set
+          set(fields, key, dataValue);
         }
       });
 
