@@ -1,2 +1,4 @@
 packages:
-  - packages/*
+  - app
+  - packages/refine-mantine
+  - packages/refine-pocketbase/lib

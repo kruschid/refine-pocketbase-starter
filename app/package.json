@@ -13,13 +13,18 @@
     "codegen": "pocketbase-typegen -o src/pocketbase.generated.ts --url http://localhost:8090 --email admin@pocketbase.local --password 1234567890"
   },
   "dependencies": {
+    "@mantine/core": "^8.3.1",
+    "@mantine/form": "^8.3.1",
+    "@mantine/notifications": "^8.3.1",
     "@refinedev/core": "^5.0.1",
     "@refinedev/react-router": "^2.0.0",
     "@refinedev/react-table": "^6.0.0",
+    "@tabler/icons-react": "^3.34.1",
     "pocketbase": "^0.26.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.2.0",
+    "react-router": "^7.9.1",
+    "react-router-dom": "^7.9.1",
     "refine-mantine": "workspace:*",
     "refine-pocketbase": "workspace:*"
   },
