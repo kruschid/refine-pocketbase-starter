@@ -1,3 +1,4 @@
+import { useOtp } from "@/hooks/useOtp";
 import {
   Button,
   type ButtonProps,
@@ -22,9 +23,8 @@ import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { type OAuthProvider, type LoginFormTypes as RefineLoginFormTypes, useLogin, useRefineOptions, useTranslate } from "@refinedev/core";
 import { IconAt, IconLockPassword } from "@tabler/icons-react";
-import { useOtp } from "@/hooks/useOtp";
-import type { LoginOptions } from "@/providers/authProvider";
 import { type ReactNode, useCallback } from "react";
+import type { LoginOptions } from "refine-pocketbase";
 
 export interface OAuthProviderMantine extends OAuthProvider {
   buttonProps?: ButtonProps;
@@ -88,7 +88,7 @@ export const Login: React.FC<LoginProps> = (p) => {
   })
 
   const handleProviderLogin = useCallback((provider: OAuthProvider) => {
-    login.mutate({ type: "oauth", providerName: provider.name, ...p.mutationVariables });
+    login.mutate({ type: "oauth", provider: provider.name, ...p.mutationVariables });
   }, [login, p.mutationVariables]);
 
   const handleSubmit = onSubmit(({ email, password }) => {
@@ -99,14 +99,14 @@ export const Login: React.FC<LoginProps> = (p) => {
     }
   });
 
-  const handleOtpLogin = useCallback((token: string) => {
+  const handleOtpLogin = useCallback((otp: string) => {
     if(p.method !== "mfa" && p.method !== "otp")
       return;
 
     login.mutate({
       ...values,
       type: p.method,
-      token,
+      otp,
     });
   }, [p, login, values]);
 

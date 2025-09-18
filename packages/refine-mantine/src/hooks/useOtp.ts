@@ -1,6 +1,6 @@
 import { useActiveAuthProvider } from "@refinedev/core";
 import { useMutation } from "@tanstack/react-query";
-import type { AuthProvider } from "@/providers/authProvider";
+import type { AuthProvider } from "refine-pocketbase";
 
 export const useOtp = ({
   onError,
