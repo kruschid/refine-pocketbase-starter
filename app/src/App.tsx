@@ -1,34 +1,25 @@
-import {
-  Authenticated,
-  AuthPage,
-  ErrorComponent,
-  Refine,
-  type ResourceProps,
-} from "@refinedev/core";
-import {
-  HeadlessCreateInferencer,
-  HeadlessEditInferencer,
-  HeadlessListInferencer,
-  HeadlessShowInferencer,
-} from "@refinedev/inferencer/headless";
-import routerBindings, { NavigateToResource } from "@refinedev/react-router";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { MantineProvider } from "@mantine/core";
+import { Notifications } from '@mantine/notifications';
+import { Refine } from "@refinedev/core";
+import routerBindings from "@refinedev/react-router";
+import { IconBrandMantine } from "@tabler/icons-react";
+import { BrowserRouter } from "react-router";
+import { notificationProvider } from "refine-mantine";
 import {
   type AuthOptions,
   authProvider,
   dataProvider,
   liveProvider,
 } from "refine-pocketbase";
-import { renderPath, template } from "typesafe-routes";
-import { CustomPage } from "./pages/custom/CustomPage";
-import { Collections } from "./pocketbase.generated";
-import { r } from "./routes";
+import { Router } from "./Router";
+import { resourceList, resources } from "./resources";
+import { theme } from "./theme";
 import { pb } from "./utils/pocketbase";
 
 const authOptions: AuthOptions = {
-  registerRedirectTo: renderPath(r.login, {}),
-  loginRedirectTo: renderPath(r.orgs, {}),
-  updatePasswordRedirectTo: renderPath(r.login, {}),
+  loginRedirectTo: resources.product.list,
+  registerRedirectTo: "/login",
+  updatePasswordRedirectTo: "/login",
 };
 
 const providers = {
@@ -37,81 +28,26 @@ const providers = {
   authProvider: authProvider(pb, authOptions),
 };
 
-const resources: ResourceProps[] = [
-  {
-    name: Collections.Orgs,
-    list: template(r.orgs),
-    create: template(r.orgs.create),
-    edit: template(r.orgs.edit),
-    show: template(r.orgs.show),
-    meta: {
-      canDelete: true,
-    },
-  },
-];
-
 export const App = () => (
   <BrowserRouter>
-    <Refine
-      {...providers}
-      routerProvider={routerBindings}
-      resources={resources}
-      options={{
-        liveMode: "auto",
-        syncWithLocation: true,
-        warnWhenUnsavedChanges: true,
-      }}
-    >
-      <Routes>
-        <Route
-          element={
-            <Authenticated
-              key="authenticated-inner"
-              redirectOnFail={renderPath(r.login, {})}
-            >
-              <Outlet />
-            </Authenticated>
-          }
-        >
-          <Route
-            index
-            element={<NavigateToResource resource={Collections.Orgs} />}
-          />
-          <Route index path={template(r.custom)} element={<CustomPage />} />
-          <Route path={template(r.orgs)}>
-            <Route
-              index
-              element={<HeadlessListInferencer resource={Collections.Orgs} />}
-            />
-            <Route
-              path={template(r.orgs._.create)}
-              element={<HeadlessCreateInferencer resource={Collections.Orgs} />}
-            />
-            <Route
-              path={template(r.orgs._.edit)}
-              element={<HeadlessEditInferencer resource={Collections.Orgs} />}
-            />
-            <Route
-              path={template(r.orgs._.show)}
-              element={<HeadlessShowInferencer resource={Collections.Orgs} />}
-            />
-          </Route>
-        </Route>
-        <Route
-          path={template(r.register)}
-          element={<AuthPage type="register" />}
-        />
-        <Route path={template(r.login)} element={<AuthPage type="login" />} />
-        <Route
-          path={template(r.forgotPassword)}
-          element={<AuthPage type="forgotPassword" />}
-        />
-        <Route
-          path={template(r.updatePassword)}
-          element={<AuthPage type="updatePassword" />}
-        />
-        <Route path="*" element={<ErrorComponent />} />
-      </Routes>
-    </Refine>
+    <MantineProvider theme={theme}>
+      <Notifications position="top-center" />
+      <Refine
+        {...providers}
+        routerProvider={routerBindings}
+        resources={resourceList}
+        notificationProvider={notificationProvider}
+        options={{
+          liveMode: "auto",
+          warnWhenUnsavedChanges: true,
+          title: {
+            icon: <IconBrandMantine size={32} />,
+            text: "Refine-Mantine",
+          },
+        }}
+      >
+        <Router />
+      </Refine>
+    </MantineProvider>
   </BrowserRouter>
 );
