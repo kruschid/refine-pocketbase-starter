@@ -126,7 +126,7 @@ export const Login: React.FC<LoginProps> = (p) => {
         />
         {p.title ?? (
           <Title order={5} mb="lg" ta="center">
-            {translate("pages.login.title", "Sign In")}
+            {translate("pages.login.title", "Sign in to your account")}
           </Title>
         )}
         <Collapse in={!isOtpInputVisible}>
@@ -172,7 +172,6 @@ export const Login: React.FC<LoginProps> = (p) => {
               <Center mt="lg">
                 <Button
                   fullWidth
-                  mb="lg"
                   type="submit"
                   {...p.submitButtonProps}
                 >
@@ -180,7 +179,7 @@ export const Login: React.FC<LoginProps> = (p) => {
                 </Button>
               </Center>
               {p.registerLink &&
-                <Text size="xs" ta="center">
+                <Text mt="lg" size="xs" ta="center">
                   {translate("pages.login.noAccount", "Don’t have an account?")}
                   {" "}
                   <Anchor component={Link} to={p.registerLink}>

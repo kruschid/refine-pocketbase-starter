@@ -5,8 +5,14 @@ export default {
   component: Register,
 };
 
-export const RegisterWithPassword = () =>
+export const WithPassword = () =>
   <Register />;
 
-export const RegisterWithPasswordConfirmation = () =>
+export const WithPasswordConfirmation = () =>
   <Register withConfirmation />;
+
+export const WithLink = () =>
+  <Register
+    withConfirmation
+    loginLink="/login"
+  />;

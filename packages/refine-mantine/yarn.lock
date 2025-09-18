@@ -3799,6 +3799,7 @@ __metadata:
     react-dom: "npm:^19.1.1"
     react-router: "npm:^7.0.2"
     react-router-dom: "npm:^7.0.2"
+    refine-pocketbase: "npm:^0.5.0-dev.1"
     storybook: "npm:^9.1.5"
     tsdown: "npm:^0.15.1"
     typescript: "npm:^5.9.2"
@@ -3821,6 +3822,16 @@ __metadata:
     react-router-dom: ^7.0.2
   languageName: unknown
   linkType: soft
+
+"refine-pocketbase@npm:^0.5.0-dev.1":
+  version: 0.5.0-dev.1
+  resolution: "refine-pocketbase@npm:0.5.0-dev.1"
+  peerDependencies:
+    "@refinedev/core": ">=5.0.0"
+    pocketbase: ">=0.22.0"
+  checksum: 10c0/6af79d1acde346ae91012b85a1a632e1069415fe56df83e6789be7f53904f72ceb31f49d1db7ec3de47559881dec5f57b6530d331dcdda4af623b037009fb00f
+  languageName: node
+  linkType: hard
 
 "regenerator-runtime@npm:^0.14.0":
   version: 0.14.0

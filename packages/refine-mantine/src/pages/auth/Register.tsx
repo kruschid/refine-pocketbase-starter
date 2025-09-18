@@ -1,4 +1,5 @@
 import {
+  Anchor,
   Button,
   type ButtonProps,
   Card,
@@ -9,18 +10,21 @@ import {
   type PinInputProps,
   Stack,
   type StackProps,
+  Text,
   TextInput,
   type TextInputProps,
   Title
 } from "@mantine/core";
 import { isEmail, isNotEmpty, useForm } from "@mantine/form";
-import { RegisterFormTypes, useRefineOptions, useRegister, useTranslate } from "@refinedev/core";
+import { type RegisterFormTypes, useRefineOptions, useRegister, useTranslate } from "@refinedev/core";
 import { IconAt, IconLockPassword } from "@tabler/icons-react";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
+import { Link } from "react-router";
 
 export interface RegisterProps {
     withConfirmation?: boolean;
     mutationVariables?: RegisterFormTypes;
+    loginLink?: string;
     // props
     wrapperProps?: StackProps;
     emailFieldProps?: TextInputProps;
@@ -79,51 +83,60 @@ export const Register: React.FC<RegisterProps> = (p) => {
         />
         {p.title ?? (
           <Title order={5} mb="lg" ta="center">
-            {translate("pages.register.title", "Register")}
+            {translate("pages.register.title", "Sign up for your account")}
           </Title>
         )}
-          <form onSubmit={handleSubmit}>
-            <TextInput
-              mb="xs"
-              type="email"
-              label={translate("pages.register.email", "Email")}
-              leftSection={<IconAt size={18} />}
-              placeholder={translate("pages.register.emailPlaceholder", "name@example.com")}
-              key={key("email")}
-              {...getInputProps("email")}
-              {...p.emailFieldProps}
-            />
+        <form onSubmit={handleSubmit}>
+          <TextInput
+            mb="xs"
+            type="email"
+            label={translate("pages.register.email", "Email")}
+            leftSection={<IconAt size={18} />}
+            placeholder={translate("pages.register.emailPlaceholder", "name@example.com")}
+            key={key("email")}
+            {...getInputProps("email")}
+            {...p.emailFieldProps}
+          />
+          <TextInput
+            mb="sm" 
+            label={translate("pages.register.password", "Password")}
+            leftSection={<IconLockPassword size={18} />}
+            placeholder="●●●●●●●●"
+            type="password"
+            key={key("password")}
+            {...getInputProps("password")}
+            {...p.passwordFieldProps}
+          />
+          {p.withConfirmation && (
             <TextInput
               mb="sm" 
-              label={translate("pages.register.password", "Password")}
+              label={translate("pages.register.password", "Confirm Password")}
               leftSection={<IconLockPassword size={18} />}
               placeholder="●●●●●●●●"
               type="password"
-              key={key("password")}
-              {...getInputProps("password")}
-              {...p.passwordFieldProps}
+              key={key("passwordConfirmation")}
+              {...getInputProps("passwordConfirmation")}
+              {...p.passwordConfirmationFieldProps}
             />
-            {p.withConfirmation && (
-              <TextInput
-                mb="sm" 
-                label={translate("pages.register.password", "Confirm Password")}
-                leftSection={<IconLockPassword size={18} />}
-                placeholder="●●●●●●●●"
-                type="password"
-                key={key("passwordConfirmation")}
-                {...getInputProps("passwordConfirmation")}
-                {...p.passwordConfirmationFieldProps}
-              />
-            )}
-            <Center mt="lg">
-              <Button
-                type="submit"
-                {...p.submitButtonProps}
-              >
-                {translate("pages.register.submit", "Register")}
-              </Button>
-            </Center>
-          </form>
+          )}
+          <Center mt="lg">
+            <Button
+              type="submit"
+              {...p.submitButtonProps}
+            >
+              {translate("pages.register.submit", "Sign up")}
+            </Button>
+          </Center>
+        </form>
+        {p.loginLink &&
+          <Text mt="lg" size="xs" ta="center">
+            {translate("pages.register.haveAccount", "Have an account?")}
+            {" "}
+            <Anchor component={Link} to={p.loginLink}>
+              {translate("pages.register.login", "Sign in")}
+            </Anchor>
+          </Text>
+        }
       </Card>
     </Stack>
   );
