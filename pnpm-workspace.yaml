@@ -2,3 +2,5 @@ packages:
   - app
   - packages/refine-mantine
   - packages/refine-pocketbase/lib
+overrides:
+  "refine-pocketbase": "workspace:*"
