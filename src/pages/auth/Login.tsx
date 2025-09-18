@@ -1,4 +1,6 @@
+import { useOtp } from "@/hooks/useOtp";
 import {
+  Anchor,
   Button,
   type ButtonProps,
   Card,
@@ -13,6 +15,7 @@ import {
   type PinInputProps,
   Stack,
   type StackProps,
+  Text,
   TextInput,
   type TextInputProps,
   Title
@@ -22,9 +25,9 @@ import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { type OAuthProvider, type LoginFormTypes as RefineLoginFormTypes, useLogin, useRefineOptions, useTranslate } from "@refinedev/core";
 import { IconAt, IconLockPassword } from "@tabler/icons-react";
-import { useOtp } from "@/hooks/useOtp";
-import type { LoginOptions } from "@/providers/authProvider";
 import { type ReactNode, useCallback } from "react";
+import { Link } from "react-router";
+import type { LoginOptions } from "refine-pocketbase";
 
 export interface OAuthProviderMantine extends OAuthProvider {
   buttonProps?: ButtonProps;
@@ -33,7 +36,9 @@ export interface OAuthProviderMantine extends OAuthProvider {
 export type LoginProps = {
   providers?: OAuthProviderMantine[];
   mutationVariables?: RefineLoginFormTypes;
-  // props
+  registerLink?: string;
+  forgotPasswordLink?: string;
+  // customization
   wrapperProps?: StackProps;
   emailFieldProps?: TextInputProps;
   passwordFieldProps?: TextInputProps;
@@ -88,27 +93,23 @@ export const Login: React.FC<LoginProps> = (p) => {
   })
 
   const handleProviderLogin = useCallback((provider: OAuthProvider) => {
-    login.mutate({ type: "oauth", providerName: provider.name, ...p.mutationVariables });
+    login.mutate({ providerName: provider.name, ...p.mutationVariables });
   }, [login, p.mutationVariables]);
 
   const handleSubmit = onSubmit(({ email, password }) => {
     if(p.method === "mfa" || p.method === "otp") {
       requestOtp.mutate(values);
     } else {
-      login.mutate({ type: "password", email, password, ...p.mutationVariables });
+      login.mutate({ email, password, ...p.mutationVariables });
     }
   });
 
-  const handleOtpLogin = useCallback((token: string) => {
+  const handleOtpLogin = useCallback((otp: string) => {
     if(p.method !== "mfa" && p.method !== "otp")
       return;
 
-    login.mutate({
-      ...values,
-      type: p.method,
-      token,
-    });
-  }, [p, login, values]);
+    login.mutate({ otp });
+  }, [p, login]);
 
   return (
     <Stack h="100vh" align="center" justify="center" {...p.wrapperProps}>
@@ -125,7 +126,7 @@ export const Login: React.FC<LoginProps> = (p) => {
         />
         {p.title ?? (
           <Title order={5} mb="lg" ta="center">
-            {translate("pages.login.title", "Sign In")}
+            {translate("pages.login.title", "Sign in to your account")}
           </Title>
         )}
         <Collapse in={!isOtpInputVisible}>
@@ -152,7 +153,6 @@ export const Login: React.FC<LoginProps> = (p) => {
               />
               {(p.method === "mfa" || p.method === "password") && (
                 <TextInput
-                  mb="sm" 
                   label={translate("pages.login.password", "Password")}
                   leftSection={<IconLockPassword size={18} />}
                   placeholder="●●●●●●●●"
@@ -162,14 +162,31 @@ export const Login: React.FC<LoginProps> = (p) => {
                   {...p.passwordFieldProps}
                 />
               )}
+              {p.forgotPasswordLink &&
+                <Text size="xs" mt="xs" ta="end">
+                  <Anchor component={Link} to={p.forgotPasswordLink}>
+                    {translate("pages.login.forgotPassword", "Forgot password?")}
+                  </Anchor>
+                </Text>
+              }
               <Center mt="lg">
                 <Button
+                  fullWidth
                   type="submit"
                   {...p.submitButtonProps}
                 >
                   {translate("pages.login.submit", "Login")}
                 </Button>
               </Center>
+              {p.registerLink &&
+                <Text mt="lg" size="xs" ta="center">
+                  {translate("pages.login.noAccount", "Don’t have an account?")}
+                  {" "}
+                  <Anchor component={Link} to={p.registerLink}>
+                    {translate("pages.login.register", "Sign up")}
+                  </Anchor>
+                </Text>
+              }
             </Collapse>
             <Collapse in={isOtpInputVisible}>
               <Input.Wrapper
@@ -186,6 +203,7 @@ export const Login: React.FC<LoginProps> = (p) => {
               </Input.Wrapper>
               <Center mt="lg">
                 <Button
+                  fullWidth
                   variant="outline"
                   onClick={otpInput.close}
                   {...p.cancelButtonProps}

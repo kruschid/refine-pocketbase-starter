@@ -6,10 +6,10 @@ export default {
   component: Login,
 };
 
-export const LoginWithPassword = () =>
+export const WithPassword = () =>
   <Login method='password' />;
 
-export const LoginWithProviders = () =>
+export const WithProviders = () =>
   <Login
     method='oauth'
     providers={[{
@@ -36,7 +36,7 @@ export const LoginWithProviders = () =>
     }]}
   />;
 
-export const LoginWithProvidersAndPassword = () =>
+export const WithProvidersAndPassword = () =>
   <Login
     method='password'
     providers={[{
@@ -49,7 +49,7 @@ export const LoginWithProvidersAndPassword = () =>
     }]}
   />;
 
-export const LoginWithProvidersAndOtp = () =>
+export const WithProvidersAndOtp = () =>
   <Login
     method='otp'
     providers={[{
@@ -62,7 +62,7 @@ export const LoginWithProvidersAndOtp = () =>
     }]}
   />;
 
-export const LoginWithProvidersAndMfa = () =>
+export const WithProvidersAndMfa = () =>
   <Login
     method='mfa'
     providers={[{
@@ -73,4 +73,11 @@ export const LoginWithProvidersAndMfa = () =>
         color: "red",
       }
     }]}
+  />;
+
+export const WithLinks = () =>
+  <Login
+    method="password"
+    registerLink="/register"
+    forgotPasswordLink="/forgot-password"
   />;
