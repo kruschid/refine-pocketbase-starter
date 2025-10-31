@@ -31,7 +31,7 @@ const providers = {
 export const App = () => (
   <BrowserRouter>
     <MantineProvider theme={theme}>
-      <Notifications position="top-center" />
+      <Notifications position="top-right" />
       <Refine
         {...providers}
         routerProvider={routerBindings}
@@ -42,7 +42,7 @@ export const App = () => (
           warnWhenUnsavedChanges: true,
           title: {
             icon: <IconBrandMantine size={32} />,
-            text: "Refine-Mantine",
+            text: "Refine-Pocketbase-Starter",
           },
         }}
       >
