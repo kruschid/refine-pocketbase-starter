@@ -25,8 +25,8 @@
     "react-dom": "^19.2.0",
     "react-router": "^7.9.4",
     "react-router-dom": "^7.9.4",
-    "refine-mantine": "^1.0.0-dev.1",
-    "refine-pocketbase": "^1.0.0"
+    "refine-mantine": "^1.0.0-dev.2",
+    "refine-pocketbase": "^1.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.1",
