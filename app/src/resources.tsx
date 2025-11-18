@@ -1,8 +1,9 @@
 import type { ResourceProps } from "@refinedev/core";
 import { IconCategoryFilled, IconLayoutGrid } from "@tabler/icons-react";
+import { Collections } from "./pocketbase.generated";
 
 const product: ResourceProps = {
-  name: "product",
+  name: Collections.Product,
   list: "products",
   create: "products/create",
   edit: "products/edit/:id",
@@ -15,7 +16,7 @@ const product: ResourceProps = {
 }
 
 const category: ResourceProps = {
-  name: "category",
+  name: Collections.Category,
   list: "cetegories",
   create: "cetegories/create",
   edit: "cetegories/edit/:id",
@@ -23,9 +24,9 @@ const category: ResourceProps = {
   meta: {
     label: "Categories",
     icon: <IconCategoryFilled />,
-    parent: product.name,
   }
 }
+
 export const resources = {
   product,
   category,
