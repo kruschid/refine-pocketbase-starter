@@ -63,6 +63,14 @@ migrate((app) => {
     "viewRule": null
   });
 
+  unmarshal({
+    "createRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\"",
+    "listRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\""
+  }, collection)
+
   app.save(collection);
 
   [
@@ -79,6 +87,8 @@ migrate((app) => {
   ].forEach(title => {
     app.save(new Record(collection, { title }))
   });
+
+
 
 }, (app) => {
   const collection = app.findCollectionByNameOrId("pbc_1174553048");
