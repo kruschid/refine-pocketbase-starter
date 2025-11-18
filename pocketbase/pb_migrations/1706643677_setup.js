@@ -13,6 +13,12 @@ migrate(
     });
     superUser.setPassword("1234567890");
     app.save(superUser);
+
+    const user = new Record(app.findCollectionByNameOrId("users"), {
+      email: "user@pocketbase.local",
+    });
+    user.setPassword("1234567890");
+    app.save(user);
   },
   (app) => {
     const superUser = app.findAuthRecordByEmail(
@@ -21,5 +27,9 @@ migrate(
     );
 
     app.delete(superUser);
+
+    const user = app.findAuthRecordByEmail("users", "user@pocketbase.local");
+
+    app.delete(user);
   }
 );
