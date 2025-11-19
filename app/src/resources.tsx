@@ -17,10 +17,10 @@ const product: ResourceProps = {
 
 const category: ResourceProps = {
   name: Collections.Category,
-  list: "cetegories",
-  create: "cetegories/create",
-  edit: "cetegories/edit/:id",
-  show: "cetegories/show/:id",
+  list: "categories",
+  create: "categories/create",
+  edit: "categories/edit/:id",
+  show: "categories/show/:id",
   meta: {
     label: "Categories",
     icon: <IconCategoryFilled />,
