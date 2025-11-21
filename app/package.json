@@ -25,7 +25,7 @@
     "react-dom": "^19.2.0",
     "react-router": "^7.9.6",
     "react-router-dom": "^7.9.6",
-    "refine-mantine": "^1.0.0-dev.2",
+    "refine-mantine": "^1.0.0",
     "refine-pocketbase": "^1.0.2"
   },
   "devDependencies": {
