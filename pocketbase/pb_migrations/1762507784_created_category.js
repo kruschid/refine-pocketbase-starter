@@ -28,7 +28,7 @@ migrate((app) => {
         "pattern": "",
         "presentable": false,
         "primaryKey": false,
-        "required": false,
+        "required": true,
         "system": false,
         "type": "text"
       },
@@ -87,8 +87,6 @@ migrate((app) => {
   ].forEach(title => {
     app.save(new Record(collection, { title }))
   });
-
-
 
 }, (app) => {
   const collection = app.findCollectionByNameOrId("pbc_1174553048");

@@ -113,10 +113,7 @@ migrate((app) => {
   app.save(collection);
 
   // fetch categories
-  
-  const categories = arrayOf(new DynamicModel({ id: "" }));
-
-  app.db().select("id").from("category").all(categories);
+  const categories = app.findAllRecords("category");
 
   [
     {
@@ -240,7 +237,9 @@ migrate((app) => {
       material: "Recycled polyester, nylon"
     }
   ].forEach(product => {
-    const category = categories[Math.floor(Math.random() * categories.length)].id;
+    const catIdx = Math.floor(Math.random() * categories.length);
+    const category = categories[catIdx].id;
+    
     app.save(
       new Record(collection, {
         ...product,
