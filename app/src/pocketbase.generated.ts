@@ -97,7 +97,7 @@ export type SuperusersRecord = {
 export type CategoryRecord = {
 	created: IsoAutoDateString
 	id: string
-	title?: string
+	title: string
 	updated: IsoAutoDateString
 }
 
