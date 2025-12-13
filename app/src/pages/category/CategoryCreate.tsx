@@ -1,4 +1,5 @@
 import { TextInput } from "@mantine/core";
+import { isNotEmpty } from "@mantine/form";
 import { type HttpError, useTranslate } from "@refinedev/core";
 import { Create, useForm } from "refine-mantine";
 import type { CategoryRecord } from "../../pocketbase.generated";
@@ -9,18 +10,23 @@ type CategoryFormValues = Required<Pick<
 >>;
 
 export const useCategoryForm = () => {
+  const t = useTranslate();
+
   const {
     saveButtonProps,
     getInputProps,
-    refineCore: { formLoading },
+    refineCore: { formLoading: isLoading },
   } = useForm<CategoryRecord, HttpError, CategoryFormValues>({
     initialValues: {
       title: ""
     },
+    validate: {
+      title: isNotEmpty(t("pages.category.categoryForm.titleEmpty", "This field is required")),
+    }
   });
 
   return {
-    formLoading,
+    isLoading,
     saveButtonProps,
     getInputProps,
   }
@@ -42,7 +48,7 @@ export const CategoryCreate = () => {
   const formProps = useCategoryForm();
 
   return (
-    <Create saveButtonProps={formProps.saveButtonProps}>
+    <Create isLoading={formProps.isLoading} saveButtonProps={formProps.saveButtonProps}>
       <CategoryForm {...formProps}/>
     </Create>
   );
