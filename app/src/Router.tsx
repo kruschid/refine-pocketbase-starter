@@ -2,7 +2,7 @@ import { Authenticated, ErrorComponent } from "@refinedev/core";
 import { NavigateToResource } from "@refinedev/react-router";
 import { IconBrandApple, IconBrandGoogle } from "@tabler/icons-react";
 import { Outlet, Route, Routes } from "react-router";
-import { Layout, LoginPage } from "refine-mantine";
+import { ForgotPasswordPage, Layout, LoginPage, RegisterPage } from "refine-mantine";
 import { CategoryCreate } from "./pages/category/CategoryCreate";
 import { CategoryEdit } from "./pages/category/CategoryEdit";
 import { CategoryList } from "./pages/category/CategoryList";
@@ -66,7 +66,7 @@ export const Router = () => (
         element={<CategoryShow />}
       />
     </Route>
-    <Route path={"/login"} element={
+    <Route path="login" element={
       <LoginPage
         method="password"
         registerLink="/register"
@@ -88,6 +88,17 @@ export const Router = () => (
             color: "gray",
           }
         }]}
+      />
+    } />
+    <Route path="register" element={
+      <RegisterPage
+        loginLink="/login"
+        withConfirmation
+      />
+    } />
+    <Route path="forgot-password" element={
+      <ForgotPasswordPage
+        loginLink="/login"
       />
     } />
     <Route path="*" element={<ErrorComponent />} />
