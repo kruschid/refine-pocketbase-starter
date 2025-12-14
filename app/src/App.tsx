@@ -17,7 +17,7 @@ import { theme } from "./theme";
 import { pb } from "./utils/pocketbase";
 
 const authOptions: AuthOptions = {
-  loginRedirectTo: resources.product.list,
+  loginRedirectTo: `/${resources.product.list}`,
   registerRedirectTo: "/login",
   updatePasswordRedirectTo: "/login",
 };
