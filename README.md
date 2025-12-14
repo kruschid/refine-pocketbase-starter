@@ -82,8 +82,13 @@ npm run dev # starts dev server on port 8080
 ```
 
 - **URL:** [http://localhost:8080](http://localhost:8080)
+- **User:** user@pocketbase.local
+- **Password:** 1234567890
 
 This will launch the application, making it accessible in your browser at the specified URL. Ensure that all necessary dependencies are installed before running the development server.
+
+> [!IMPORTANT]
+> The default credentials can be changed in the admin dashboard to maintain security.
 
 Now you are all set up to add more frontend dependencies and start turning your app ideas into code. If you're interested in learning how to deploy your application and make your features available to users, continue reading the distribution section.
 
