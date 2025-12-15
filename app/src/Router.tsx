@@ -1,8 +1,8 @@
-import { Authenticated, ErrorComponent } from "@refinedev/core";
+import { Authenticated } from "@refinedev/core";
 import { NavigateToResource } from "@refinedev/react-router";
 import { IconBrandApple, IconBrandGoogle } from "@tabler/icons-react";
 import { Outlet, Route, Routes } from "react-router";
-import { ForgotPasswordPage, Layout, LoginPage, RegisterPage } from "refine-mantine";
+import { ForgotPasswordPage, Layout, LoginPage, NotFound, RegisterPage } from "refine-mantine";
 import { CategoryCreate } from "./pages/category/CategoryCreate";
 import { CategoryEdit } from "./pages/category/CategoryEdit";
 import { CategoryList } from "./pages/category/CategoryList";
@@ -101,6 +101,6 @@ export const Router = () => (
         loginLink="/login"
       />
     } />
-    <Route path="*" element={<ErrorComponent />} />
+    <Route path="*" element={<NotFound returnTo="/" />} />
   </Routes>
 );
