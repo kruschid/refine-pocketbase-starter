@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 const INBUCKET_URL = "http://127.0.0.1:9000";
 
@@ -10,16 +10,17 @@ test.describe("auth provider", () => {
     // register
     await page.goto("/");
     await page.click('a[href="/register"]');
-    await page.fill("#email-input", email);
-    await page.fill("#password-input", password);
+    await page.fill("[type=email]", email);
+    await page.fill("[data-path=password]", password);
+    await page.fill("[data-path=passwordConfirmation]", password);
     await page.click("[type=submit]");
 
     // log in
     await page.waitForURL("**/login**");
-    await page.fill("#email-input", email);
-    await page.fill("#password-input", password);
+    await page.fill("[type=email]", email);
+    await page.fill("[type=password]", password);
     await page.click("[type=submit]");
-    await page.waitForURL("**/orgs");
+    await page.waitForURL("**/products");
   });
 
   test("password reset", async ({ page, request }) => {
@@ -32,21 +33,22 @@ test.describe("auth provider", () => {
 
     // register
     await page.goto("/register");
-    await page.fill("#email-input", email);
-    await page.fill("#password-input", password);
+    await page.fill("[type=email]", email);
+    await page.fill("[data-path=password]", password);
+    await page.fill("[data-path=passwordConfirmation]", password);
     await page.click("[type=submit]");
 
     // reset pw
     await page.waitForURL("**/login**");
     await page.click("a[href='/forgot-password']");
-    await page.fill("#email-input", email);
+    await page.fill("[type=email]", email);
     await page.click("[type=submit]");
 
     // wait for email delivery
     await page.waitForTimeout(2000);
 
     // read token from email
-    const token = await request
+    const resetPasswordLink = await request
       .get(`${INBUCKET_URL}/api/v1/mailbox/${mailbox}`)
       .then((res) => res.json())
       .then(([{ id }]) =>
@@ -58,21 +60,15 @@ test.describe("auth provider", () => {
           res.body.text
             .match(/\[Reset password\]\((.+)\)/)
             .slice(-1)[0] // extract link
-            .split("/")
-            .slice(-1), // extract token
       );
 
     // update password
-    await page.goto(`/update-password?token=${token}`);
-    await page.fill("#password-input", changedPassword);
-    await page.fill("#confirm-password-input", changedPassword);
+    await page.goto(resetPasswordLink);
+    await page.locator("[type=password]").nth(0).fill(changedPassword);
+    await page.locator("[type=password]").nth(1).fill(changedPassword);
     await page.click('[type="submit"]');
 
-    // login to confirm new pw
-    await page.waitForURL("**/login**");
-    await page.fill("#email-input", email);
-    await page.fill("#password-input", changedPassword);
-    await page.click("[type=submit]");
-    await page.waitForURL("**/orgs");
+    const message = page.getByText('Successfully changed the user password.');
+    await expect(message).toBeVisible();
   });
 });
