@@ -1,10 +1,25 @@
-import { Badge, ButtonGroup, NumberFormatter, Text, Title } from "@mantine/core";
+import {
+  Badge,
+  ButtonGroup,
+  NumberFormatter,
+  Text,
+  Title,
+} from "@mantine/core";
 import { useShow } from "@refinedev/core";
-import { CloneButton, DeleteButton, EditButton, RefreshButton, Show } from "refine-mantine";
-import type { CategoryResponse, ProductResponse } from "../../pocketbase.generated";
+import {
+  CloneButton,
+  DeleteButton,
+  EditButton,
+  RefreshButton,
+  Show,
+} from "refine-mantine";
+import type {
+  CategoryResponse,
+  ProductResponse,
+} from "../../pocketbase.generated";
 
 type ProductExpanded = ProductResponse<{
-  category: CategoryResponse
+  category: CategoryResponse;
 }>;
 
 export const ProductShow = () => {
@@ -15,26 +30,24 @@ export const ProductShow = () => {
     meta: {
       fields: ["id", "name", "description", "price", "expand.category.title"],
       expand: ["category"],
-    }
+    },
   });
 
   return (
     <Show
       isLoading={isPending}
-      headerButtons={() =>
+      headerButtons={() => (
         <ButtonGroup>
           <RefreshButton />
           <CloneButton />
           <EditButton />
           <DeleteButton />
         </ButtonGroup>
-      }
+      )}
     >
       {product && (
         <>
-          <Title order={5}>
-            Name
-          </Title>
+          <Title order={5}>Name</Title>
           <Text>{product.name}</Text>
           <Title order={5} mt="sm">
             Description
@@ -57,4 +70,4 @@ export const ProductShow = () => {
       )}
     </Show>
   );
-}
+};

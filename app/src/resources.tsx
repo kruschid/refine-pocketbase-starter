@@ -12,8 +12,8 @@ const product: ResourceProps = {
     canDelete: true,
     label: "Products",
     icon: <IconList />,
-  }
-}
+  },
+};
 
 const category: ResourceProps = {
   name: Collections.Category,
@@ -24,12 +24,12 @@ const category: ResourceProps = {
   meta: {
     label: "Categories",
     icon: <IconCategoryFilled />,
-  }
-}
+  },
+};
 
 export const resources = {
   product,
   category,
-}
+};
 
 export const resourceList = Object.values(resources);

@@ -6,7 +6,7 @@ export const CategoryEdit = () => {
 
   return (
     <Edit saveButtonProps={formProps.saveButtonProps}>
-      <CategoryForm {...formProps}/>
+      <CategoryForm {...formProps} />
     </Edit>
   );
-}
+};

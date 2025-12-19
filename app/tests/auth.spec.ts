@@ -56,10 +56,7 @@ test.describe("auth provider", () => {
       )
       .then((res) => res.json())
       .then(
-        (res) =>
-          res.body.text
-            .match(/\[Reset password\]\((.+)\)/)
-            .slice(-1)[0] // extract link
+        (res) => res.body.text.match(/\[Reset password\]\((.+)\)/).slice(-1)[0], // extract link
       );
 
     // update password
@@ -68,7 +65,7 @@ test.describe("auth provider", () => {
     await page.locator("[type=password]").nth(1).fill(changedPassword);
     await page.click('[type="submit"]');
 
-    const message = page.getByText('Successfully changed the user password.');
+    const message = page.getByText("Successfully changed the user password.");
     await expect(message).toBeVisible();
   });
 });

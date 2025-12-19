@@ -1,5 +1,5 @@
 import { MantineProvider } from "@mantine/core";
-import { Notifications } from '@mantine/notifications';
+import { Notifications } from "@mantine/notifications";
 import { Refine } from "@refinedev/core";
 import routerBindings from "@refinedev/react-router";
 import { IconBrandMantine } from "@tabler/icons-react";

@@ -20,4 +20,4 @@ export const ProductEdit = () => {
       <ProductForm {...formProps} />
     </Edit>
   );
-}
+};
