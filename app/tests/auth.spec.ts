@@ -16,7 +16,7 @@ test.describe("auth provider", () => {
     await page.click("[type=submit]");
 
     // log in
-    await page.waitForURL("**/login**");
+    await page.waitForURL("**/login");
     await page.fill("[type=email]", email);
     await page.fill("[type=password]", password);
     await page.click("[type=submit]");
@@ -37,15 +37,19 @@ test.describe("auth provider", () => {
     await page.fill("[data-path=password]", password);
     await page.fill("[data-path=passwordConfirmation]", password);
     await page.click("[type=submit]");
+    await page.waitForURL("**/login**");
+
+    // epect notification
 
     // reset pw
-    await page.waitForURL("**/login**");
-    await page.click("a[href='/forgot-password']");
+    await page.goto("/forgot-password");  
     await page.fill("[type=email]", email);
     await page.click("[type=submit]");
 
+    await expect(page.getByText("Password reset link sent")).toBeVisible();
+
     // wait for email delivery
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(2_000);
 
     // read token from email
     const resetPasswordLink = await request
