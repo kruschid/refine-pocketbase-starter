@@ -8,7 +8,7 @@
     "format": "biome format --write",
     "lintci": "biome ci",
     "dev": "vite --port 8080",
-    "build": "tsc -b && vite build",
+    "build": "npm run lintci && tsc -b && vite build",
     "preview": "vite preview",
     "codegen": "pocketbase-typegen -o src/pocketbase.generated.ts --url http://localhost:8090 --email admin@pocketbase.local --password 1234567890"
   },
