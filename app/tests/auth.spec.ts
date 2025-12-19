@@ -10,13 +10,14 @@ test.describe("auth provider", () => {
     // register
     await page.goto("/");
     await page.click('a[href="/register"]');
+    await expect(page.getByText("Sign up for your account")).toBeVisible();
     await page.fill("[type=email]", email);
     await page.fill("[data-path=password]", password);
     await page.fill("[data-path=passwordConfirmation]", password);
     await page.click("[type=submit]");
 
     // log in
-    await page.waitForURL("**/login");
+    await expect(page.getByText("Sign in to your account")).toBeVisible();
     await page.fill("[type=email]", email);
     await page.fill("[type=password]", password);
     await page.click("[type=submit]");
@@ -37,9 +38,7 @@ test.describe("auth provider", () => {
     await page.fill("[data-path=password]", password);
     await page.fill("[data-path=passwordConfirmation]", password);
     await page.click("[type=submit]");
-    await page.waitForURL("**/login**");
-
-    // epect notification
+    await expect(page.getByText("Sign in to your account")).toBeVisible();
 
     // reset pw
     await page.goto("/forgot-password");  
