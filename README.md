@@ -14,14 +14,16 @@ Packages your full-stack tool/app/product in a single Docker image (`~33 MB`) an
 
 - **Frontend**
 
-  - Refine (React meta-framework for CRUD-heavy web applications)
-  - Refine providers for PocketBase using the [refine-pocketbase](https://github.com/kruschid/refine-pocketbase) library and [PocketBase JS SDK](https://github.com/pocketbase/js-sdk)
-  - Headless, use any UI framework you like
+  - [Refine](https://refine.dev/) (React meta-framework for CRUD-heavy web applications)
+  - Refine providers for PocketBase using the [refine-pocketbase](https://github.com/kruschid/refine-pocketbase) library and the [PocketBase JS SDK](https://github.com/pocketbase/js-sdk)
+  - Mantine UI components specifically tailored for Refine: [refine-mantine](https://github.com/kruschid/refine-mantine)
+    - Alternatively: use any UI framework you like by using Refine hooks in headless mode
   - Real-time updates enabled
+  - Built-in authentication features (login, registration flow, and auth providers)
+  - Pre-installed [tabler icons](https://tabler.io/icons)
   - E2E tests with Playwright (optional)
-  - Typesafe routes using the [typesafe-routes](https://github.com/kruschid/typesafe-routes) library (optional)
-  - Pre-configured TypeScript type generation from database schema with [pocketbase-typegen](https://github.com/patmood/pocketbase-typegen) (optional)
-  - Vite, TypeScript, ESLint
+  - Preconfigured TypeScript type generation from the database schema with [pocketbase-typegen](https://github.com/patmood/pocketbase-typegen) (optional)
+  - Vite, TypeScript, Biome
 
 - **Backend (Pocketbase)**
 
