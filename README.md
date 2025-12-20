@@ -163,7 +163,7 @@ services:
       - ./volumes/pb_data:/pb/pb_data
 ```
 
-After that, simply navigate to that file in your terminal and enter:
+After that, simply navigate to the file’s location in your terminal and enter:
 
 ```sh
 docker compose up -d
@@ -245,6 +245,11 @@ services:
     environment:
       - CADDY_INGRESS_NETWORKS=caddy
 ```
+
+## Playwrigt Reports
+
+Playwright reports are uploaded in GitHub Actions using the [`actions/upload-artifact`](https://github.com/actions/upload-artifact) action. These reports include trace files with screenshots, which can be helpful for debugging failing tests. This is especially useful because tests running in the CI pipeline may behave differently than they do on a local machine. The Playwright report can be downloaded from GitHub by navigating to **Actions**, selecting the relevant workflow run, and then opening the **Artifacts** section.
+
 
 ## How to Contribute
 
