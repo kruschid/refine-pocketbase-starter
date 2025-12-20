@@ -9,7 +9,7 @@ RUN npm run build
 
 FROM alpine:3
 
-ARG PB_VERSION=0.25.7
+ARG PB_VERSION=0.34.2
 
 RUN apk add --no-cache \
     unzip \
