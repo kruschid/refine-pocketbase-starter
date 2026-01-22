@@ -41,7 +41,7 @@ test.describe("auth provider", () => {
     await expect(page.getByText("Sign in to your account")).toBeVisible();
 
     // reset pw
-    await page.goto("/forgot-password");  
+    await page.goto("/forgot-password");
     await page.fill("[type=email]", email);
     await page.click("[type=submit]");
 
