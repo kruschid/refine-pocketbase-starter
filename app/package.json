@@ -10,7 +10,8 @@
     "dev": "vite --port 8080",
     "build": "npm run lintci && tsc -b && vite build",
     "preview": "vite preview",
-    "codegen": "pocketbase-typegen -o src/pocketbase.generated.ts --url http://localhost:8090 --email admin@pocketbase.local --password 1234567890"
+    "codegen": "pocketbase-typegen -o src/pocketbase.generated.ts --url http://localhost:8090 --email admin@pocketbase.local --password 1234567890",
+    "prepare": "cd .. && husky app/.husky"
   },
   "dependencies": {
     "@mantine/core": "^8.3.13",
@@ -38,6 +39,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.2",
     "globals": "^16.5.0",
+    "husky": "^9.1.7",
     "pocketbase-typegen": "^1.3.3",
     "typescript": "^5.9.3",
     "vite": "^7.3.1"

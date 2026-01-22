@@ -12,7 +12,8 @@
       "!node_modues",
       "!dist",
       "!playwright-report",
-      "!**/*.generated.ts"
+      "!**/*.generated.ts",
+      "!test-results"
     ]
   },
   "formatter": {
